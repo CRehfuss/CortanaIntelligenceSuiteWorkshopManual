@@ -47,7 +47,7 @@ clIf, for whatever reason, you cannot complete this lab whether due to time cont
 
 ## Task 3: Create a project in Workbench
 1. With Azure Machine Learning Workbench open, select the plus sign (+) in the PROJECTS pane and choose New Project. 
-    ![Screenshot](images/create_new_project.png) #TODO
+    ![Screenshot](images/create_new_project.PNG)
 
 ## Task 4: Upload the Sample Datasets
 
@@ -59,13 +59,19 @@ clIf, for whatever reason, you cannot complete this lab whether due to time cont
    - FlightWeatherWithAirportCode.csv
    - AirportCodeLocationLookupClean.csv
 4. Click the **Data Image** on the side, click on the **Plus**, and select **Add Data Source**.
-    ![Screenshot](images/upload_the_sample_datasets_0.png) #TODO
+    ![Screenshot](images/upload_the_sample_datasets_0.PNG)
 5. In the dialog that appears, click **Text Files**, hit **Next**
 6. Browse to the **AirportCodeLocationLookupClean.csv** file. All the default settings are fine so now you can click **Finish**.
 7. You should see the contents of AirportCodeLocationLookupClean in the window
-    ![Screenshot](images/upload_the_sample_datasets_1.png) #TODO
+    ![Screenshot](images/upload_the_sample_datasets_1.PNG)
 
 8. Repeat the previous step for the **FlightWeatherWithAirportCode.csv** and **FlightDelaysWithAirportCodes.csv**.
+
+
+
+
+
+
 
 ## Task 4: Start a New Experiment
 
