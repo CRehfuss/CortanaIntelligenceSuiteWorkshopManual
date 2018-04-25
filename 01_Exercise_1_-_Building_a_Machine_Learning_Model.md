@@ -18,7 +18,7 @@ This exercise has 9 tasks:
 
 ## Get out of Jail Free
 
-If, for whatever reason, you cannot complete this lab whether due to time contraints or if you are not able to troubleshoot an issue, we have created a "get out of jail free" exercise. If you wish to use this exercise at any time, please proceed to [Appendix A](09_Appendix_A_-_Alternative_to_Azure_ML_Exercise.md). After completing Appendix A, you can continue to [Exercise 2](02_Exercise_2_-_Setup_Azure_Data_Factory.md).
+clIf, for whatever reason, you cannot complete this lab whether due to time contraints or if you are not able to troubleshoot an issue, we have created a "get out of jail free" exercise. If you wish to use this exercise at any time, please proceed to [Appendix A](09_Appendix_A_-_Alternative_to_Azure_ML_Exercise.md). After completing Appendix A, you can continue to [Exercise 2](02_Exercise_2_-_Setup_Azure_Data_Factory.md).
 
 ## Task 1: Connect to the Lab VM
 
@@ -45,26 +45,27 @@ If, for whatever reason, you cannot complete this lab whether due to time contra
 
     ![Screenshot](images/choose_ml_workspace.png)
 
-## Task 3: Upload the Sample Datasets
+## Task 3: Create a project in Workbench
+1. With Azure Machine Learning Workbench open, select the plus sign (+) in the PROJECTS pane and choose New Project. 
+    ![Screenshot](images/create_new_project.png) #TODO
 
-1. Before you begin creating a machine learning experiment, there are three datasets you need to load.
+## Task 4: Upload the Sample Datasets
+
+1. There are three datasets you need to load.
 2. Download the three CSV sample datasets from here: http://aka.ms/awtdata and save AdventureWorksTravelDatasets.zip to your Desktop.
    - **Note:** You will need to unblock the zip file before extracting its files. Do this by right clicking on it, selecting **Properties**, and then unblocking the file in the resulting dialog.
 3. Extract the ZIP and verify you have the following files:
    - FlightDelaysWithAirportCodes.csv
    - FlightWeatherWithAirportCode.csv
-   - AirportCodeLocationClean.csv
-4. Click **+ NEW** at the bottom, point to **Dataset** , and select **From Local File**.
+   - AirportCodeLocationLookupClean.csv
+4. Click the **Data Image** on the side, click on the **Plus**, and select **Add Data Source**.
+    ![Screenshot](images/upload_the_sample_datasets_0.png) #TODO
+5. In the dialog that appears, click **Text Files**, hit **Next**
+6. Browse to the **AirportCodeLocationLookupClean.csv** file. All the default settings are fine so now you can click **Finish**.
+7. You should see the contents of AirportCodeLocationLookupClean in the window
+    ![Screenshot](images/upload_the_sample_datasets_1.png) #TODO
 
-    ![Screenshot](images/upload_the_sample_datasets_0.png)
-
-5. In the dialog that appears, click **Choose File** and browse to the **FlightDelaysWithAirportCodes.csv** file and click **OK**.
-6. Change the name of the dataset to **FlightDelaysWithAirportCodes**.
-7. Click on the check mark on the bottom right corner of the screen.
-
-    ![Screenshot](images/upload_the_sample_datasets_1.png)
-
-8. Repeat the previous step for the **FlightWeatherWithAirportCode.csv** and **AirportCodeLocationLookupClean.csv** setting the name for the dataset in a similar fashion.
+8. Repeat the previous step for the **FlightWeatherWithAirportCode.csv** and **FlightDelaysWithAirportCodes.csv**.
 
 ## Task 4: Start a New Experiment
 
