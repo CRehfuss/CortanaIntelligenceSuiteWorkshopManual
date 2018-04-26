@@ -25,8 +25,7 @@ clIf, for whatever reason, you cannot complete this lab whether due to time cont
 1. From the left side of the Azure portal, click on **All resources**.
 2. In the **Filter items...** box, type in **lab**.
 3. Select your lab VM. Keep in mind the name of the virtual machine will begin with the "app name" you provided when setting up this workshop environment (in the prerequisite deployment).
-2. At the top of the blade for your VM, click on **Connect**.
-
+2. At the top of the blade for your VM, click on **Connect**
     ![Screenshot](images/connect_to_the_lab_vm_1.png)
 
 3. Download and open the RDP file.
@@ -39,8 +38,7 @@ clIf, for whatever reason, you cannot complete this lab whether due to time cont
    - Password: **Password.1!!**
 
 ## Task 2: Navigate to Machine Learning Studio
-
-1. In a browser, go to [https://studio.azureml.net](https://studio.azureml.net) and log in using the same account you used in the Azure portal to deploy the prerequisites for this workshop.
+ 1. In a browser, go to [https://studio.azureml.net](https://studio.azureml.net) and log in using the same account you used in the Azure portal to deploy the prerequisites for this workshop.
 2. Once you are signed in, ensure the workspace that was created as part of the prerequisites is selected from the top bar. **Make sure** you select the correct workspace; if you do not you might run into issues in subsequent steps.
 
     ![Screenshot](images/choose_ml_workspace.png)
@@ -50,125 +48,99 @@ clIf, for whatever reason, you cannot complete this lab whether due to time cont
     ![Screenshot](images/create_new_project.PNG)
 
 ## Task 4: Upload the Sample Datasets
-
 1. There are three datasets you need to load.
 2. Download the three CSV sample datasets from here: http://aka.ms/awtdata and save AdventureWorksTravelDatasets.zip to your Desktop.
    - **Note:** You will need to unblock the zip file before extracting its files. Do this by right clicking on it, selecting **Properties**, and then unblocking the file in the resulting dialog.
 3. Extract the ZIP and verify you have the following files:
-   - FlightDelaysWithAirportCodes.csv
-   - FlightWeatherWithAirportCode.csv
-   - AirportCodeLocationLookupClean.csv
+    !   - FlightDelaysWithAirportCodes.csv
+   - FlightWeatherWithAirportCode.cs   - AirportCodeLocationLookupClean.csv
 4. Click the **Data Image** on the side, click on the **Plus**, and select **Add Data Source**.
     ![Screenshot](images/upload_the_sample_datasets_0.PNG)
 5. In the dialog that appears, click **Text Files**, hit **Next**
-6. Browse to the **AirportCodeLocationLookupClean.csv** file. All the default settings are fine so now you can click **Finish**.
-7. You should see the contents of AirportCodeLocationLookupClean in the window
+6. Browse to the **AirportCodeLocationLookupClean.csv** file. Click **Next**
+7. The default settings in **File Details** and **Data Types** are fine so you can click **Next** for both of these sections.
+8. We want to upload the entire file into the Workbench. In the **Sampling** window, click **+ New** and select **Full File** from the drop down. Click on **Apply**.
+    ![Screenshot](images/upload_the_sample_datasets_2.png)
+9. Click on **Full File** and then select **Set as Active**. The row that says **Full File** should now be starred. 
+
+9. The default settings in **Path Column** are fine. Click on **Finish**.
+ right click on any     ![Screenshot](images/upload_the_sample_datasets_3.png)
+7. You should see the contents of AirportCodeLocationLookupClean in the window.
     ![Screenshot](images/upload_the_sample_datasets_1.PNG)
+    
+8. Repeat the previous step for **FlightWeatherWithAirportCode.csv** and **FlightDelaysWithAirportCodes.csv**.
 
-8. Repeat the previous step for the **FlightWeatherWithAirportCode.csv** and **FlightDelaysWithAirportCodes.csv**.
-
-
-
-
-
-
-
-## Task 4: Start a New Experiment
-
-1. Click **+ NEW** in the command bar.
-2. In the options that appear, click **Blank Experiment**.
-
-    ![Screenshot](images/start_a_new_experiment_0.png)
-
-3. Give your new experiment a name, such as **AdventureWorks Travel** by editing the label near the top of the design surface.
-
-    ![Screenshot](images/start_a_new_experiment_1.png)
-
-4. In the toolbar on the left, in the Search experiment items box, type the name of the dataset you created with flight delay data (FlightDelaysWithAirportCodes). You should see a component for it listed under **Saved Datasets** -> **My Datasets**.
-
-    ![Screenshot](images/start_a_new_experiment_2.png)
-
-5. Click and drag on the **FlightDelaysWithAirportCodes** to add it to the design surface.
-
-    ![Screenshot](images/start_a_new_experiment_3.png)
-
-6. Next, you will explore each of the datasets to understand what kind of cleanup (aka data munging) will be necessary.
-7. Hover over the output port of the **FlightDelaysWithAirportCodes** dataset.
-
-    ![Screenshot](images/start_a_new_experiment_4.png)
-
-8. Right click on the port and select **Visualize**.
-
-    ![Screenshot](images/start_a_new_experiment_5.png)
-
-9. A new dialog will appear showing a maximum of 100 rows by 100 columns sample of the dataset. You can see at the top that the dataset has a total of 2,719,418 rows (also referred to as examples in Machine Learning literature) and has 20 columns (also referred to as features).
-
-    ![Screenshot](images/start_a_new_experiment_6.png)
-
-10. Because all 20 columns are displayed, you can scroll the grid horizontally. Scroll until you see the **DepDel15** column and click it to view statistics about the column. The **DepDel15** column displays a 1 when the flight was delayed at least 15 minutes and 0 if there was no such delay. In the model you will construct, you will try to predict the value of this column for future data.
-
-    ![Screenshot](images/start_a_new_experiment_7.png)
-
-11. Notice in the Statistics panel that a value of 27444 appears for Missing Values. This means that 27,444 rows do not have a value in this column. Since this value is very important to our model, we will eliminate any rows that do not have a value for this column. In fact, removing these missing values is just one of several "data wrangling" tasks that need to be done. Here is a list of tasks that we will need to do on this dataset before it is ready to be processed by a machine learning algorithm.
+## Task 5: Clean the Data
+1. Next, you will explore each of the datasets to understand what kind of cleanup (aka data munging) will be necessary.
+2. Click on **FlightDelaysWithAirportCodes.dsource** in the data source column.
+3. The window will repopulate with the FlightDelaysWithAirportCodes dataset (it may take a few minutes to load). You can see at the top that the dataset has a total of 2,719,418 rows (also referred to as examples in Machine Learning literature) and has 20 columns (also referred to as features).
+    ![Screenshot](images/clean_the_data_0.png)
+4. Select the Metrics button. Histograms are generated and displayed. You can switch back to the data view by selecting the Data button.
+    ![Screenshot](images/clean_the_data_1.png)
+    
+5. Because all 20 columns are displayed, you can scroll the grid vertically to see the statistics. A complete set of statistics has been calculated for each column. Scroll until you see the **DepDel15** column. The **DepDel15** column displays a 1 when the flight was delayed at least 15 minutes and 0 if there was no such delay. In the model you will construct, you will try to predict the value of this column for future data.
+    ![Screenshot](images/clean_the_data_2.png)
+    
+6. Notice that a value of 27444 appears for Number of Missing Values for **DepDel15**. This means that 27,444 rows do not have a value in this column. Since this value is very important to our model, we will eliminate any rows that do not have a value for this column. In fact, removing these missing values is just one of several "data wrangling" tasks that need to be done. Here is a list of tasks that we will need to do on this dataset before it is ready to be processed by a machine learning algorithm.
     1. Remove rows with missing **DepDel15** values.
-    1. Create a new column that represents the departure hour. This will be based on the **CRSDepTime** column.
-    1. Trim down the list of columns needed to do the analysis at hand.
+    2. Create a new column that represents the departure hour. This will be based on the **CRSDepTime** column.
+    3. Trim down the list of columns needed to do the analysis at hand.
 
-12. In order to perform the aforementioned data manipulation tasks, you could use built-in Azure ML modules for each task or you could use a script (such as R or Python). Here, you will use R. To do this, add an **Execute R Script** (recall you can search for modules on the left) module beneath the flights dataset and connect the output of the dataset to the first input port (leftmost) of the **Execute R Script**.
 
-    ![Screenshot](images/ex01_connect_flightdelayswithairportcodes_to_r_module.png)
+    7. In order to perform the aforementioned data manipulation tasks, we will create a data preparation package. Begin creating a data preparation package by selecting the **Prepare** button. The Prepare dialog box opens. Enter a name for your data preparation package and select **OK**.
+    ![Screenshot](images/clean_the_data_3.png)
+    ![Screenshot](images/clean_the_data_4.png)
+Now, let's do some basic data preparation.
 
-37. In the **Properties** panel for **Execute R Script**, click the "double window" icon to maximize the script editor.
+8. Remove rows with missing **DepDel15** Values
+    i. Select the **DepDel15** column
+    ii. Right-click to select it
+    iii. Select **Filter Column** from the drop downs
+   The **Filter Column** window opens. Click the drop down under **I Want To** and select **Remove Rows**. In **Conditions** select **is null**. Click on **OK**
+   ![Screenshot](images/clean_the_data_5.png)
+   ![Screenshot](images/clean_the_data_6.png)
+   
+   There should now only be 2,691,974 rows.
+   
+9. We want to create a column for departure hour called CRSDepHour. To create a new column right-click on any column name and select **Add Column (Script)**. 
+A new Add Column (Script) window will open input the following values:
+    **New Column Name**: CRSDepHour
+    **Insert this New Column After**: (This doesn't matter, CRSDepTime is fine)
+    **New Column Code**: math.floor(row.CRSDepHour / 100)
+    **Code Block Type**: Expression
+    Hit **OK**. 
+    ![Screenshot](images/clean_the_data_7.png)
+    Notice that the new column has been inserted.
+    ![Screenshot](images/clean_the_data_8.png)
+    
+10. Right-click and select **Remove Columns** for the following columns in the dataset:
+**Year**, **CRSDepTime**, **DepDelay**, **CRSArrTime**, **ArrDelay**, **ArrDel15**, **Cancelled**, **OriginAirportName**, **OriginLatitude**, **OriginLongitude**, **DestAirportName**, **DestLatitude**, **DestLongitude**
 
-    ![Screenshot](images/start_a_new_experiment_27.png)
+Only the following columns should remain: **Month**, **DayofMonth**, **DayOfWeek**, **Carrier**, **CRSDepHour**, **DepDel15**, **OriginAirportCode**, **DestAirportCode**
 
-38. Replace the default script with the following and click the checkmark to save it.
+11.Take notice of the individual data preparation steps that are detailed in the **STEPS** pane. As you filtered the null value rows and added/removed columns, each action was recorded as a data preparation step. You can edit individual steps to adjust their settings, reorder the steps, and remove steps.
 
-    ``` R
-    ds.flights <- maml.mapInputPort(1)
-
-    # Remove rows with missing values in DepDel15
-    ds.flights <- ds.flights[!is.na(ds.flights$DepDel15), ]
-
-    # Create a column for departure hour called CRSDepHour
-    ds.flights$CRSDepHour <- floor(ds.flights$CRSDepTime / 100)
-
-    # Trim the columns to only those we will use for the predictive model
-    ds.flights = ds.flights[, c("OriginAirportCode", "Month", "DayofMonth", "CRSDepHour", "DayOfWeek", "Carrier", "DestAirportCode", "DepDel15")]
-
-    maml.mapOutputPort("ds.flights");
-    ```
-
-39. Run the experiment to update the metadata and process the data (this may take a minute or two to complete).
-40. Right click on the leftmost output port of your **Execute R Script** module and select **Visualize**.
-41. Compare the data in this view with the data before it was processed by the R script (recall the list of manipulations above). Verify that the dataset only contains the 8 columns referenced in the R script.
-
-    ![Screenshot](images/ex01_data_viz_after_flightdelayswithairportcodes_r_module.png)
-
-42. At this point the Flight Delay Data is prepared, and we turn to preparing the historical weather data.
+12. Close the data preparation editor. Select the x icon on the UpdateFlightDelaysWithAirportCodes tab with the graph icon to close the tab. Your work is automatically saved into the UpdateFlightDelaysWithAirportCodes.dprep file shown under the Data Preparations heading.
+    ![Screenshot](images/clean_the_data_9.png)
+    
+13. At this point the Flight Delay Data is prepared, and we turn to preparing the historical weather data.
 
 ## Task 5: Prepare the Weather Data
+1. Click on **FlightWeatherWithAirportCode** dataset under the **Data Sources** tab.
 
-1. To the right of the **FlightDelaysWithAirportCodes** dataset, add the **FlightWeatherWithAirportCode** dataset.
+2. Observe that this data set has 406,516 rows and 29 columns. For this model, we are going to focus on predicting delays using WindSpeed (in MPH), SeaLevelPressure (in inches of Hg), and HourlyPrecip (in inches). We will focus on preparing the data for those features.
 
-    ![Screenshot](images/prepare_the_weather_data_0.png)
+4. Click on **Metrics**, scroll to the **WindSpeed** column and review the statistics. Observe that there are 149 Missing Values. We will need to ensure that we remove any missing values.
 
-2. Right click the output port of the **FlightWeatherWithAirportCode** dataset and select **Visualize**.
+    ![Screenshot](images/prepare_the_weather_0.png)
 
-    ![Screenshot](images/prepare_the_weather_data_1.png)
+5. Next, scroll to the **SeaLevelPressure** column. Observe that the Data Type was inferred as an Object and there are 0 Missing Values. Examine the histogram, and observe that many of the features of a numeric value (e.g., 29.96, 30.01, etc.), but there are many features with the string value of M for Missing. We will need to replace this value of M with a suitable numeric value so that we can convert this feature to be a numeric feature.
 
-3. Observe that this data set has 406,516 rows and 29 columns. For this model, we are going to focus on predicting delays using WindSpeed (in MPH), SeaLevelPressure (in inches of Hg), and HourlyPrecip (in inches). We will focus on preparing the data for those features.
-4. In the dialog, click the **WindSpeed** column and review the statistics. Observe that the Feature Type was inferred as String and that there are 32 Missing Values. Below that, examine the histogram to see that, even though the type was inferred as string, the values are all actually numbers (e.g. the x-axis values are 0, 6, 5, 7, 3, 8, 9, 10, 11, 13). We will need to ensure that we remove any missing values and convert WindSpeed to its proper type as a numeric feature.
+    ![Screenshot](images/prepare_the_weather_1.png)
 
-    ![Screenshot](images/prepare_the_weather_data_2.png)
+6. Finally, examine the **HourlyPrecip** feature. Observe that it too was inferred to have a Data Type of Object and is missing values 0  rows. Looking at the histogram, observe that besides the numeric values, there is a value T for Trace amount of rain and there is an empty input. We will need to replace the T with a suitable numeric value, remove the rows with the empty input, and covert this feature to a numeric feature.
 
-5. Next, click the **SeaLevelPressure** column. Observe that the Feature Type was inferred as String and there are 0 Missing Values. Scroll down to the histogram, and observe that many of the features of a numeric value (e.g., 29.96, 30.01, etc.), but there are many features with the string value of M for Missing. We will need to replace this value of M with a suitable numeric value so that we can convert this feature to be a numeric feature.
-
-    ![Screenshot](images/prepare_the_weather_data_3.png)
-
-6. Finally, examine the **HourlyPrecip** feature. Observe that it too was inferred to have a Feature Type of String and is missing values for 374,503 rows. Looking at the histogram, observe that besides the numeric values, there is a value T for Trace amount of rain). We will need to replace the T with a suitable numeric value and covert this feature to a numeric feature.
-
-    ![Screenshot](images/prepare_the_weather_data_4.png)
+    ![Screenshot](images/prepare_the_weather_2.png)
 
 7. As with the manipulation of the flight data, here you will use R script to perform the necessary data manipulation tasks on the weather data. The following steps will be taken:
     1. Substitue missing values in the **HourlyPrecip** and **WindSpeed** columns.
