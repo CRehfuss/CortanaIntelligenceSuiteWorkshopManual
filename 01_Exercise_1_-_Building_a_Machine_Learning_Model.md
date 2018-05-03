@@ -134,15 +134,15 @@ Only the following columns should remain: **Month**, **DayofMonth**, **DayOfWeek
 
     ![Screenshot](images/prepare_the_weather_0.png)
 
-5. Next, scroll to the **SeaLevelPressure** column. Observe that the Data Type was inferred as an Object and there are 0 Missing Values. Examine the histogram, and observe that many of the features of a numeric value (e.g., 29.96, 30.01, etc.), but there are many features with the string value of M for Missing. We will need to replace this value of M with a suitable numeric value so that we can convert this feature to be a numeric feature.
+5. Next, scroll to the **SeaLevelPressure** column. Observe that the Data Type was inferred as an Object and workbench thinks there are 0 Missing Values. Examine the histogram, and observe that many of the features of a numeric value (e.g., 29.96, 30.01, etc.), but there are many features with the string value of M which stands for Missing. We will need to replace this value of M with a suitable numeric value so that we can convert this feature to be a numeric feature.
 
     ![Screenshot](images/prepare_the_weather_1.png)
 
-6. Finally, examine the **HourlyPrecip** feature. Observe that it too was inferred to have a Data Type of Object and is missing values 0  rows. Looking at the histogram, observe that besides the numeric values, there is a value T for Trace amount of rain and there is an empty input. We will need to replace the T with a suitable numeric value, remove the rows with the empty input, and covert this feature to a numeric feature.
+6. Finally, examine the **HourlyPrecip** feature. Observe that it too was inferred to have a Data Type of Object and is missing 0  rows. Looking at the histogram, observe that besides the numeric values, there is a value T for Trace amount of rain and there is an empty input. We will need to replace the T with a suitable numeric value, remove the rows with the empty input, and covert this feature to a numeric feature.
 
     ![Screenshot](images/prepare_the_weather_2.png)
 
-7. As with the manipulation of the flight data, here you will use R script to perform the necessary data manipulation tasks on the weather data. The following steps will be taken:
+7. While we manipulated the flight data by hand, here you will use a pyth script to perform the necessary data manipulation tasks on the weather data. The following steps will be taken:
     1. Substitue missing values in the **HourlyPrecip** and **WindSpeed** columns.
     1. Create a new column called **Hour** based on the **Time** column.
     1. Replace the **WindSpeed** values that contain **M**.
@@ -152,15 +152,11 @@ Only the following columns should remain: **Month**, **DayofMonth**, **DayOfWeek
     1. Change the data type of **AirportCode** to categorical.
     1. Reduce the number of columns in the dataset.
 
-12. Add an **Execute R Script** module beneath the weather dataset and connect the output of the dataset to the first input port (leftmost) of the **Execute R Script**.
+12.On the **Transform** menu at the top, select Transform Dataflow (Script). 
 
-    ![Screenshot](images/ex01_connect_weather_to_r_module.png)
+    ![Screenshot](images/ex01_connect_weather_to_python_module.png)
 
-37. In the **Properties** panel for **Execute R Script**, click the "double window" icon to maximize the script editor.
-
-    ![Screenshot](images/start_a_new_experiment_27.png)
-
-38. Replace the default script with the following and click the checkmark to save it.
+38. Paste the following code in the **Code to Transform Dataflow** and click **ok.
 
     ``` R
     ds.weather <- maml.mapInputPort(1)
