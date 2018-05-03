@@ -60,11 +60,11 @@ clIf, for whatever reason, you cannot complete this lab whether due to time cont
 6. Browse to the **AirportCodeLocationLookupClean.csv** file. Click **Next**
 7. The default settings in **File Details** and **Data Types** are fine so you can click **Next** for both of these sections.
 8. We want to upload the entire file into the Workbench. In the **Sampling** window, click **+ New** and select **Full File** from the drop down. Click on **Apply**.
-    ![Screenshot](images/upload_the_sample_datasets_2.png)
+    ![Screenshot](images/upload_the_sample_datasets_2.PNG)
 9. Click on **Full File** and then select **Set as Active**. The row that says **Full File** should now be starred. 
 
 9. The default settings in **Path Column** are fine. Click on **Finish**.
- right click on any     ![Screenshot](images/upload_the_sample_datasets_3.png)
+ right click on any     ![Screenshot](images/upload_the_sample_datasets_3.PNG)
 7. You should see the contents of AirportCodeLocationLookupClean in the window.
     ![Screenshot](images/upload_the_sample_datasets_1.PNG)
     
