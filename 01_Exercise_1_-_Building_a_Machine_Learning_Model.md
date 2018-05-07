@@ -156,46 +156,41 @@ Only the following columns should remain: **Month**, **DayofMonth**, **DayOfWeek
 
     ![Screenshot](images/ex01_connect_weather_to_python_module.png)
 
-38. Paste the following code in the **Code to Transform Dataflow** and click **ok.
+38. Paste the following code in the **Code to Transform Dataflow** and click **ok**.
 
-    ``` R
-    ds.weather <- maml.mapInputPort(1)
-
-    # substitute missing values in HourlyPrecip & WindSpeed
-    ds.weather$HourlyPrecip[is.na(ds.weather$HourlyPrecip)] <- 0.0
-    ds.weather$WindSpeed[is.na(ds.weather$WindSpeed)] <- 0.0
+    ``` Python
+        # substitute missing values in HourlyPrecip & WindSpeed
+    df['HourlyPrecip'] = df['HourlyPrecip'].replace(r'\s+',np.nan,regex=True).replace('',np.nan).fillna(0)
+    df['WindSpeed'] = df['WindSpeed'].fillna(0)
 
     # Round weather time up to the next hour since
     # that's the hour for which we want to use flight data
-    ds.weather$Hour = ceiling(ds.weather$Time / 100)
+
+    df['Hour'] = np.ceil(df['Time']/100)
 
     # Replace any WindSpeed values of "M" with 0.005 and make the feature numeric
-    speed.num = ds.weather$WindSpeed
-    speed.num[speed.num == "M"] = 0.005
-    speed.num = as.numeric(speed.num)
-    ds.weather$WindSpeed = speed.num 
+    speed = df['WindSpeed']
+    speed = speed.replace('M', '0.005')
+    df['WindSpeed'] = pd.to_numeric(speed, errors = 'coerce')
 
     # Replace any SeaLevelPressure values of "M" with 29.92 (the average pressure) and make the feature numeric
-    pressure.num = ds.weather$SeaLevelPressure
-    pressure.num[pressure.num == "M"] = 29.92
-    pressure.num = as.numeric(pressure.num)
-    ds.weather$SeaLevelPressure = pressure.num 
+    pressure = df['SeaLevelPressure']
+    pressure = pressure.replace('M', '29.92')
+    df['SeaLevelPressure'] = pd.to_numeric(pressure, errors = 'coerce')
 
-    # Adjust the HourlyPrecip variable (convert "T" (trace) to 0.005)
-    rain = ds.weather$HourlyPrecip
-    rain[rain %in% c("T")] = "0.005"
-    ds.weather$HourlyPrecip = as.numeric(rain)
+    #Adjust the HourlyPrecip variable (convert "T" (trace) to 0.005)
+    rain = df['HourlyPrecip']
+    rain = rain.replace('T', '0.005')
+    df['HourlyPrecip'] = pd.to_numeric(rain, errors = 'coerce')
 
     # Pare down the variables in the Weather dataset
-    ds.weather = ds.weather[, c("AirportCode", "Month", "Day", "Hour", "WindSpeed", "SeaLevelPressure", "HourlyPrecip")]
+    df = df[["AirportCode", "Month", "Day", "Hour", "WindSpeed", "SeaLevelPressure", "HourlyPrecip"]]
 
-    # cast some of the data types to factor (categorical)
-    ds.weather$AirportCode <- as.factor(ds.weather$AirportCode)
-
-    maml.mapOutputPort("ds.weather");
+    # cast some of the data types to category (categorical)
+    df['AirportCode'] = df['AirportCode'].astype('category')
     ```
 
-39. Run the experiment to update the metadata and process the data (this may take a minute or two to complete).
+39. The transformation will run and process the data (this may take a minute or two to complete).
 40. Right click on the leftmost output port of your **Execute R Script** module and select **Visualize**.
 41. Compare the data in this view with the data before it was processed by the R script (recall the list of manipulations above). Verify that the dataset only contains the 7 columns referenced in the R script. Also verify that **WindSpeed**, **SeaLevelPressure**, and **HourlyPrecip** are now all Numeric Feature types and that they have no missing values.
 
